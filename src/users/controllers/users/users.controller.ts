@@ -35,7 +35,7 @@ export class UsersController {
     //this invokes our validation from the user dto
     //update to check unique on email
     @UsePipes(ValidationPipe)
-    @Post('/register')
+    @Post('register')
     createUser(@Body() createUserDto: CreateUserDto){
         return this.userService.createUser(createUserDto);
     }
