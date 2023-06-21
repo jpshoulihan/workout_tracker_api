@@ -1,9 +1,9 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-local";
 import { AuthService } from "../services/auth/auth.service";
-import { Inject, UnauthorizedException } from "@nestjs/common";
+import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 
-
+@Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy){
     constructor(@Inject('AUTH_SERVICE') private readonly authService: AuthService){
         //Strategy default is username validation change in super to email

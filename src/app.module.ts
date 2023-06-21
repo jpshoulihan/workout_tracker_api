@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { SessionEntity } from './typeorm/entities/Session';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -13,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
     url: 'postgres://unanihny:q7uYGdTWvc4vzV0KG-EJ7LP9PMjh9_q0@horton.db.elephantsql.com/unanihny',
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: [User, SessionEntity],
   }), UsersModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
