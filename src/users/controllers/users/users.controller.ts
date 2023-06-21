@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Inject, Param, HttpException, HttpStatus, UseInterceptors, ClassSerializerInterceptor, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, Inject, Param, HttpException, HttpStatus, UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, UsePipes, ValidationPipe } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { SerializedUser } from 'src/typeorm/entities';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
@@ -32,7 +32,10 @@ export class UsersController {
         else throw new UserNotFoundException;
         
     }
-    @Post()
+    //this invokes our validation from the user dto
+    //update to check unique on email
+    @UsePipes(ValidationPipe)
+    @Post('/register')
     createUser(@Body() createUserDto: CreateUserDto){
         return this.userService.createUser(createUserDto);
     }
