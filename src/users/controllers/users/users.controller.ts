@@ -1,14 +1,16 @@
-import { Body, Controller, Get, Post, Inject, Param, HttpException, HttpStatus, UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, Inject, Param, HttpException, HttpStatus, UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { SerializedUser } from 'src/typeorm/entities';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UserNotFoundException } from 'src/users/exceptions/UserNotFound.exception';
 import { UsersService } from 'src/users/services/users/users.service';
+import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 
 @Controller('users')
 export class UsersController {
 
     constructor(@Inject('USER_SERVICE') private readonly userService: UsersService){}
+    @UseGuards(AuthenticatedGuard)
     @Get()
     async getUsers(){
         return (await this.userService.findUsers()).map(user => plainToClass(SerializedUser, user));

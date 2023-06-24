@@ -1,4 +1,4 @@
-import { ConsoleLogger, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/services/users/users.service';
 import { comparePassword } from 'src/utils/bcrypt';
 

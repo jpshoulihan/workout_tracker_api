@@ -16,9 +16,9 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 60000,
+        maxAge: 2 * 60 * 60 * 1000,
       },
-      store: new TypeormStore().connect(sessionRepository),
+      store: new TypeormStore({cleanupLimit:10}).connect(sessionRepository),
     })
   )
   app.use(passport.initialize());
