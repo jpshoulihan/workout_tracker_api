@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { SessionEntity } from './typeorm/entities/Session';
 import { ExercisesModule } from './exercises/exercises.module';
 import { Exercise } from './typeorm/entities/Exercise';
+import { Workout } from './typeorm/entities/Workout';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -16,7 +17,7 @@ import { Exercise } from './typeorm/entities/Exercise';
     url: 'postgres://unanihny:q7uYGdTWvc4vzV0KG-EJ7LP9PMjh9_q0@horton.db.elephantsql.com/unanihny',
     synchronize: true,
     logging: true,
-    entities: [User, SessionEntity, Exercise],
+    entities: [User, SessionEntity, Exercise, Workout],
   }), UsersModule, AuthModule, ExercisesModule],
   controllers: [AppController],
   providers: [AppService],

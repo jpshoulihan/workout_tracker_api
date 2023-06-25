@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Workout } from "./Workout";
 
 @Entity({name: 'users'})
 export class User {
@@ -34,4 +35,7 @@ export class User {
 
     @Column({default: new Date()})
     createdAt: string;
+
+    @OneToMany(() => Workout, workout => workout.user)
+    workouts: Workout[];
 }
