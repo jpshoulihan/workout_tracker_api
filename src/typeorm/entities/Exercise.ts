@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { WorkoutExercise } from "./WorkoutExercise";
 
 export type BodySplitType = 'upper' | 'lower'
 export type ActionType = 'push' | 'pull'
@@ -29,4 +30,7 @@ export class Exercise {
 
     @Column()
     instruction: string;
+
+    @OneToMany(() => WorkoutExercise, workoutExercise => workoutExercise.exercise)
+    workoutExercises: WorkoutExercise[];
 }

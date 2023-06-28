@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Workout } from "./Workout";
+import { WorkoutExercise } from "./WorkoutExercise";
 
 @Entity({name: 'users'})
 export class User {
