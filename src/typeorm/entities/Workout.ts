@@ -3,15 +3,15 @@ import { User } from "./User";
 
 @Entity({ name: 'workouts' })
 export class Workout {
-    @PrimaryGeneratedColumn()
-    workoutId: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column()
     workoutName: string;
-
-    @ManyToOne(() => User, user => user.workouts)
-    user: User;
-
+    
     @Column({default: new Date()})
     createdAt: string;
+    
+    @ManyToOne(() => User, user => user.workouts)
+    user: User;
 }

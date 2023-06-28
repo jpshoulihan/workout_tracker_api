@@ -20,7 +20,6 @@ export class AuthController {
     @UseGuards(AuthenticatedGuard)
     @Get('status')
     async getAuthStatus(@Req() req: Request){
-        const user: any =  req.user;
-        console.log(user.id)
+        return req.user;
     }
 }

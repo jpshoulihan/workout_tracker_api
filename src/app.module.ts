@@ -9,6 +9,7 @@ import { SessionEntity } from './typeorm/entities/Session';
 import { ExercisesModule } from './exercises/exercises.module';
 import { Exercise } from './typeorm/entities/Exercise';
 import { Workout } from './typeorm/entities/Workout';
+import { WorkoutsModule } from './workouts/workouts.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { Workout } from './typeorm/entities/Workout';
     synchronize: true,
     logging: true,
     entities: [User, SessionEntity, Exercise, Workout],
-  }), UsersModule, AuthModule, ExercisesModule],
+  }), UsersModule, AuthModule, ExercisesModule, WorkoutsModule],
   controllers: [AppController],
   providers: [AppService],
 })
