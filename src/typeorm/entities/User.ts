@@ -3,8 +3,8 @@ import { Workout } from "./Workout";
 
 @Entity({name: 'users'})
 export class User {
-    @PrimaryGeneratedColumn({type:'bigint'})
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column({nullable:true})
     firstName: string;

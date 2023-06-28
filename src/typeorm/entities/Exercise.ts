@@ -12,8 +12,8 @@ export enum EquipmentType {
 
 @Entity({name: 'exercises'})
 export class Exercise {
-    @PrimaryGeneratedColumn({type:'bigint'})
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column({type: 'enum', enum: ['upper', 'lower'], default: 'upper'})
     bodySplit: BodySplitType

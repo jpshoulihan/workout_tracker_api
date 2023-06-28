@@ -21,7 +21,7 @@ export class UsersService {
     findUserByEmail(email: string): Promise<User | undefined> {
         return this.UserRepository.findOne({ where: { email } })
     }
-    findUserById(id: number): Promise<User | undefined> {
+    findUserById(id: string): Promise<User | undefined> {
         return this.UserRepository.findOne({ where: { id } })
     }
 

@@ -7,19 +7,20 @@ export class AuthController {
     //invoking guard to enforce protection
     @UseGuards(LocalAuthGuard)
     @Post('login')
-    async login(){
+    async login(@Req() req: Request){
+        return req.user
     }
 
     @Get('')
     async getAuthSession(@Session() session: Record<string, any>){
         //modifying the session intializes the session
         session.authenticated = true;
-        console.log(session)
     }
 
     @UseGuards(AuthenticatedGuard)
     @Get('status')
     async getAuthStatus(@Req() req: Request){
-        return req.user;
+        const user: any =  req.user;
+        console.log(user.id)
     }
 }

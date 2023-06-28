@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer'
 
 export class SerializedUser {
-    id: number;
+    id: string;
     email: string;
     
     @Exclude()
