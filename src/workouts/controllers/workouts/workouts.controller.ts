@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { CreateWorkoutDto } from 'src/workouts/dtos/CreateWorkout.dto';
 import { WorkoutsService } from 'src/workouts/services/workouts/workouts.service';
@@ -12,11 +12,16 @@ export class WorkoutsController {
     @Post('workout')
     async createWorkout(@Body() createWorkoutDto: CreateWorkoutDto, @Req() req: Request){
         const user: any = req.user
-        console.log('User ID before adding: ', user.id)
         createWorkoutDto.userId = user.id
-        console.log('User ID Added:', createWorkoutDto.userId)
         console.log(createWorkoutDto)
         return this.workoutService.createWorkout({...createWorkoutDto})
+    }
+
+    @UseGuards(AuthenticatedGuard)
+    @Get()
+    async getWorkouts(@Req() req: Request){
+        const user: any = req.user
+        return await this.workoutService.findWorkouts(user.id)
     }
 }
 

@@ -10,6 +10,10 @@ export class WorkoutsService {
         @InjectRepository(Workout) private WorkoutRepository: Repository<Workout>,
     ) { }
 
+    async findWorkouts(id: string){
+        return await this.WorkoutRepository.findBy({user: {id: id}})
+    }
+
     async createWorkout(createWorkoutDto: CreateWorkoutDto){
         const newWorkout = this.WorkoutRepository.create({ ...createWorkoutDto, user: {id: createWorkoutDto.userId} })
         return this.WorkoutRepository.save(newWorkout)
