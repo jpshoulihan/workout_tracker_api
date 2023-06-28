@@ -10,6 +10,8 @@ import { ExercisesModule } from './exercises/exercises.module';
 import { Exercise } from './typeorm/entities/Exercise';
 import { Workout } from './typeorm/entities/Workout';
 import { WorkoutsModule } from './workouts/workouts.module';
+import { WorkoutExercise } from './typeorm/entities/WorkoutExercise';
+import { WorkoutExercisesModule } from './workout-exercises/workout-exercises.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,8 +20,8 @@ import { WorkoutsModule } from './workouts/workouts.module';
     url: 'postgres://unanihny:q7uYGdTWvc4vzV0KG-EJ7LP9PMjh9_q0@horton.db.elephantsql.com/unanihny',
     synchronize: true,
     logging: true,
-    entities: [User, SessionEntity, Exercise, Workout],
-  }), UsersModule, AuthModule, ExercisesModule, WorkoutsModule],
+    entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise],
+  }), UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule],
   controllers: [AppController],
   providers: [AppService],
 })
