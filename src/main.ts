@@ -6,8 +6,10 @@ import { TypeormStore } from 'connect-typeorm';
 import { SessionEntity } from './typeorm/entities/Session';
 import { DataSource } from 'typeorm';
 import { SwaggerModule, DocumentBuilder, SwaggerDocumentOptions } from '@nestjs/swagger';
+import * as dotenv from 'dotenv';
 
 async function bootstrap() {
+  dotenv.config();
   const app = await NestFactory.create(AppModule)
   const sessionRepository = app.get(DataSource).getRepository(SessionEntity)
 
@@ -31,7 +33,7 @@ async function bootstrap() {
   app.use(
     session({
       name: 'WORKOUT_TRACKER_SESSION_ID',
-      secret: 'secret',
+      secret: process.env.SECRET,
       resave: false,
       saveUninitialized: false,
       cookie: {

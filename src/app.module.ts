@@ -12,12 +12,14 @@ import { Workout } from './typeorm/entities/Workout';
 import { WorkoutsModule } from './workouts/workouts.module';
 import { WorkoutExercise } from './typeorm/entities/WorkoutExercise';
 import { WorkoutExercisesModule } from './workout-exercises/workout-exercises.module';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     name: 'default',
     type:'postgres',
-    url: 'postgres://unanihny:q7uYGdTWvc4vzV0KG-EJ7LP9PMjh9_q0@horton.db.elephantsql.com/unanihny',
+    url: process.env.DB_URL,
     synchronize: true,
     logging: true,
     entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise],
