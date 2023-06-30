@@ -18,4 +18,14 @@ export class WorkoutsService {
         const newWorkout = this.WorkoutRepository.create({ ...createWorkoutDto, user: {id: createWorkoutDto.userId} })
         return this.WorkoutRepository.save(newWorkout)
     }
+
+    async findWorkoutExercisesByWorkoutId(id:string) {
+        const exercises = await this.WorkoutRepository.createQueryBuilder('workout')
+        .leftJoinAndSelect('workout.workoutExercises', 'workoutExercises')
+        .leftJoinAndSelect('workoutExercises.exercise', 'exercise')
+        .where('workout.id = :id', { id: id })
+        .getMany();
+    
+      return exercises;
+    }
 }

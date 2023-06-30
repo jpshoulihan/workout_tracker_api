@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { CreateWorkoutDto } from 'src/workouts/dtos/CreateWorkout.dto';
 import { WorkoutsService } from 'src/workouts/services/workouts/workouts.service';
@@ -22,6 +22,12 @@ export class WorkoutsController {
     async getWorkouts(@Req() req: Request){
         const user: any = req.user
         return await this.workoutService.findWorkouts(user.id)
+    }
+
+    @UseGuards(AuthenticatedGuard)
+    @Get('id/:id')
+    async getWorkoutExercisesByWorkoutId(@Param('id') id: string){
+        return await this.workoutService.findWorkoutExercisesByWorkoutId(id)
     }
 }
 

@@ -18,8 +18,4 @@ export class WorkoutExercisesService {
             
         return this.WorkoutExerciseRepository.save(newWorkoutExercise)
     }
-
-    findWorkoutExercisesByUserId() {
-        return this.WorkoutExerciseRepository.find()
-    }
 }
