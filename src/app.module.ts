@@ -12,7 +12,7 @@ import { Workout } from './typeorm/entities/Workout';
 import { WorkoutsModule } from './workouts/workouts.module';
 import { WorkoutExercise } from './typeorm/entities/WorkoutExercise';
 import { WorkoutExercisesModule } from './workout-exercises/workout-exercises.module';
-import { CustomExercisesModule } from './custom_exercises/custom_exercises.module';
+import { CustomExercisesModule } from './custom-exercises/custom-exercises.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
