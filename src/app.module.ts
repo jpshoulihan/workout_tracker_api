@@ -12,6 +12,7 @@ import { Workout } from './typeorm/entities/Workout';
 import { WorkoutsModule } from './workouts/workouts.module';
 import { WorkoutExercise } from './typeorm/entities/WorkoutExercise';
 import { WorkoutExercisesModule } from './workout-exercises/workout-exercises.module';
+import { CustomExercisesModule } from './custom_exercises/custom_exercises.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -23,7 +24,7 @@ dotenv.config();
     synchronize: true,
     logging: true,
     entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise],
-  }), UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule],
+  }), UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule, CustomExercisesModule],
   controllers: [AppController],
   providers: [AppService],
 })
