@@ -12,6 +12,9 @@ enum BodySplitType {
 
 export class CreateCustomExerciseDto {
 
+    @IsString()
+    userId: string
+
     @IsEnum(BodySplitType)
     bodySplit: BodySplitType;
 

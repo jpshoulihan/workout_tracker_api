@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { WorkoutExercise } from "./WorkoutExercise";
+import { User } from "./User";
 
 export type ActionType = 'push' | 'pull'
 
@@ -11,12 +12,12 @@ export class CustomExercise {
     id: string;
     
     @Column({type: 'enum', enum: ['upper', 'lower'], default: 'upper'})
-    bodySplit: string;
+    bodySplit: BodySplitType;
 
     @Column({type: 'enum', enum: ['push', 'pull'], default: 'push'})
     action: ActionType
 
-    @Column('string')
+    @Column()
     equipment: string;
     
     @Column()
@@ -27,4 +28,7 @@ export class CustomExercise {
 
     @OneToMany(() => WorkoutExercise, workoutExercise => workoutExercise.customExercise)
     workoutExercises: WorkoutExercise[];
+
+    @ManyToOne(() => User, user => user.customExercises)
+    user: User;
 }

@@ -6,20 +6,31 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class CustomExercisesService {
-    constructor(@InjectRepository(CustomExercise) private CustomExerciseRepository: Repository<CustomExercise>){}
+    constructor(@InjectRepository(CustomExercise) private CustomExerciseRepository: Repository<CustomExercise>) { }
 
-    createExercise(createCustomExercise: CreateCustomExerciseDto) {
-        const newCustomExercise = this.CustomExerciseRepository.create({...createCustomExercise})
+    createCustomExercise(createCustomExerciseDto: CreateCustomExerciseDto) {
+        const newCustomExercise = this.CustomExerciseRepository.create({ ...createCustomExerciseDto, user: { id: createCustomExerciseDto.userId } })
         return this.CustomExerciseRepository.save(newCustomExercise)
     }
-
-    findCustomExercise(){
+    findCustomExercises() {
         return this.CustomExerciseRepository.find()
     }
-
-    async updateCustomExercise(id:string, createCustomExercise:CreateCustomExerciseDto){
-        const customExercise = await this.CustomExerciseRepository.findOne({where: {id}})
-        const updateCustomExercise = {...customExercise, ...createCustomExercise}
+    async findCustomExerciseById(id: string) {
+        const customExercise = await this.CustomExerciseRepository.findOne({ where: { id } })
+        return customExercise
+    }
+    async updateCustomExercise(id: string, createCustomExerciseDto: CreateCustomExerciseDto) {
+        const customExercise = await this.CustomExerciseRepository.findOne({ where: { id } })
+        const updateCustomExercise = { ...customExercise, ...createCustomExerciseDto }
         return this.CustomExerciseRepository.save(updateCustomExercise)
+    }
+    async deleteCustomExercise(id: string) {
+        const deleteCustomExercise = await this.CustomExerciseRepository.createQueryBuilder('custom_exercises')
+            .delete()
+            .from(CustomExercise)
+            .where("id = :id", { id: id })
+            .execute()
+
+        return deleteCustomExercise
     }
 }

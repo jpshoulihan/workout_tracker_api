@@ -1,12 +1,17 @@
 import { Module } from '@nestjs/common';
-import { CustomerExercisesController } from './customer-exercises/customer-exercises.controller';
-import { CustomerExercisesController } from './controllers/customer-exercises/customer-exercises.controller';
-import { Controller } from './controllers/customer-exercises/.controller';
-import { CustomExercisesController } from './controllers/customer-exercises/custom-exercises/custom-exercises.controller';
-import { CustomerExercisesController } from './controllers/customer-exercises/customer-exercises.controller';
+import { CustomExercise } from 'src/typeorm/entities/CustomExercise';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CustomExercisesService } from './services/custom-exercises/custom-exercises.service';
+import { CustomExercisesController } from './controllers/custom-exercises/custom-exercises.controller';
 
 @Module({
-  controllers: [CustomerExercisesController, Controller, CustomExercisesController],
-  providers: []
+  imports: [TypeOrmModule.forFeature([CustomExercise])],
+  controllers: [CustomExercisesController],
+  providers: [
+    {
+      provide: 'CUSTOM_EXERCISE_SERVICE',
+      useClass: CustomExercisesService
+    }
+  ]
 })
 export class CustomExercisesModule {}
