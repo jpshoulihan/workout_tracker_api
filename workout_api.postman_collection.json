@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "61938766-18e3-4065-a21e-938fe24961a8",
+		"name": "workout_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7746888"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jmeadows@email.com\",\n    \"password\":\"mountaindog\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jmeadows@email.com\",\n    \"password\":\"mountaindog\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"email@email.com\",\n    \"password\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_exercise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bodySplit\": \"upper\",\n    \"action\":\"pull\",\n    \"equipment\": \"barbell\",\n    \"exerciseName\": \"Bicep Curl\",\n    \"instruction\": \"Knees slightly bent. Glutes engaged. Arms straight down. Grip sligtly wider than hips. Squeeze barbell with index and little finger. Hinge elbow and bring barbell to chin. Focus on engaging the bicep.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/exercises/exercise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"exercises",
+						"exercise"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_exercises",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bodySplit\": \"upper\",\n    \"action\":\"push\",\n    \"equipment\": \"barbell\",\n    \"exerciseName\": \"bench press\",\n    \"instruction\": \"Eyes under bar. Create shelf with back. Screw feet into floor. Brace core. Lower bar to sternum.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/exercises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"exercises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_workout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"workoutName\": \"Big Pull Day\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/workouts/workout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"workouts",
+						"workout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_users_workouts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/workouts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"workouts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_workout_exercise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"exerciseId\": \"5637dca3-b5b5-4c3f-bf9c-98f8b1656a31\",\n    \"workoutId\" : \"f13d422d-a7b4-4228-aa12-1b1b2e8b988d\",\n    \"order\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/workout-exercises/workout-exercise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"workout-exercises",
+						"workout-exercise"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch_user_profile",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Meadows\",\n    \"age\": 49,\n    \"weight\":102.1,\n    \"height\": 167.5,\n    \"avatar\": \"https://cdn.muscleandstrength.com/sites/default/files/field/image/author/john-meadows.jpg\",\n    \"username\": \"Mountain Dawg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_users_workout_exercises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/workouts/id/f13d422d-a7b4-4228-aa12-1b1b2e8b988d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"workouts",
+						"id",
+						"f13d422d-a7b4-4228-aa12-1b1b2e8b988d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_custom_exercise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bodySplit\": \"lower\",\n    \"action\": \"push\",\n    \"equipment\": \"smith machine\",\n    \"exerciseName\": \"calf raise\",\n    \"instruction\": \"Lay 25kg plates less than shoulder width apart under barbell of smith machine. Load the barbell with desired weight. Get into back squat position. Place balls of feet on plates on the floor. Heels hang off. Attempt to stand on the tips of your toes, descend until heels brush the floor.Repeat.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/custom-exercises/custom-exercise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"custom-exercises",
+						"custom-exercise"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
