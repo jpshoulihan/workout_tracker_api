@@ -20,6 +20,18 @@ export class AuthController {
     @UseGuards(AuthenticatedGuard)
     @Get('status')
     async getAuthStatus(@Req() req: Request){
-        return req.user;
+        return req.session;
     }
+
+    @Get('logout')
+    async logout(@Req() request: Request) {
+        request.session.destroy((err) => {
+            if (err) {
+              // Handle any error that may occur during logout
+              console.error('Logout error:', err);
+              return { message: 'Error during logout' };
+            }
+            return { message: 'Logged out successfully' };
+          });
+        }
 }
