@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { CreateCustomExerciseDto } from 'src/custom-exercises/dtos/CustomExerciseDto';
-import { CustomExercisesService } from 'src/custom-exercises/services/custom-exercises/custom-exercises.service';
+import { CustomExercisesService } from 'src/custom-exercises/services/custom-exercises.service';
 import {Request} from 'express'
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 
