@@ -1,6 +1,8 @@
 import { Controller, Post, UseGuards, Get, Session, Req } from '@nestjs/common';
 import { AuthenticatedGuard, LocalAuthGuard } from 'src/auth/utils/LocalGuard';
+import { SerializedUser } from 'src/typeorm/entities';
 import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
 
 @Controller('auth')
 export class AuthController {
@@ -8,7 +10,7 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Req() req: Request){
-        return req.user
+        return plainToClass(SerializedUser, req.user)
     }
 
     @Get('')
