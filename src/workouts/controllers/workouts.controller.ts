@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { CreateWorkoutDto } from 'src/workouts/dtos/CreateWorkout.dto';
-import { WorkoutsService } from 'src/workouts/services/workouts/workouts.service';
+import { WorkoutsService } from 'src/workouts/services/workouts.service';
 import { Request } from 'express';
 
 @Controller('workouts')

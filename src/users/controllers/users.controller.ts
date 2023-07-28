@@ -3,7 +3,7 @@ import { plainToClass } from 'class-transformer';
 import { SerializedUser } from 'src/typeorm/entities';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UserNotFoundException } from 'src/users/exceptions/UserNotFound.exception';
-import { UsersService } from 'src/users/services/users/users.service';
+import { UsersService } from 'src/users/services/users.service';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { UpdateUserProfileDto } from 'src/users/dtos/UpdateUserProfile.dto';
 import { Request } from 'express';

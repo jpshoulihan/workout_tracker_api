@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { CreateExerciseDto } from 'src/exercises/dtos/CreateExercise.dto';
-import { ExercisesService } from 'src/exercises/services/exercises/exercises.service';
+import { ExercisesService } from 'src/exercises/services/exercises.service';
 
 @Controller('exercises')
 export class ExercisesController {

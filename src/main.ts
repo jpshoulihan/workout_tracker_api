@@ -42,8 +42,16 @@ async function bootstrap() {
       store: new TypeormStore({cleanupLimit:10}).connect(sessionRepository),
     })
   )
+
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Enable CORS for your React frontend
+  app.enableCors({
+    origin: 'http://localhost:5173', // Replace with your frontend domain
+    credentials: true,
+  });
+
   await app.listen(8000);
 }
 bootstrap();
