@@ -22,7 +22,7 @@ export class AuthController {
     @UseGuards(AuthenticatedGuard)
     @Get('status')
     async getAuthStatus(@Req() req: Request){
-        return req.session;
+        return req.isAuthenticated();
     }
 
     @Get('logout')

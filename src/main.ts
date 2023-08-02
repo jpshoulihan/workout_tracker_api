@@ -5,7 +5,6 @@ import * as passport from 'passport'
 import { TypeormStore } from 'connect-typeorm';
 import { SessionEntity } from './typeorm/entities/Session';
 import { DataSource } from 'typeorm';
-import { SwaggerModule, DocumentBuilder, SwaggerDocumentOptions } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {
@@ -13,23 +12,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const sessionRepository = app.get(DataSource).getRepository(SessionEntity)
 
-  const config = new DocumentBuilder()
-    .setTitle('Workout Tracker')
-    .setDescription('Work in progress')
-    .setVersion('0.1.0')
-    .addBearerAuth()
-    .build();
+  // Enable CORS for your React frontend
+  app.enableCors({
+    origin: 'http://localhost:3000', // Replace with your frontend domain
+    credentials: true,
+  });
   
-    const options: SwaggerDocumentOptions = {
-      operationIdFactory: (
-          controllerKey: string,
-          methodKey: string
-      ) => methodKey
-  };
-  
-  const document = SwaggerModule.createDocument(app, config, options);
-  SwaggerModule.setup('api', app, document);
-
   app.use(
     session({
       name: 'WORKOUT_TRACKER_SESSION_ID',
@@ -37,20 +25,16 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 2 * 60 * 60 * 1000,
+        maxAge: 7200000,
+        sameSite: 'lax'
       },
-      store: new TypeormStore({cleanupLimit:10}).connect(sessionRepository),
+      store: new TypeormStore().connect(sessionRepository),
     })
   )
 
   app.use(passport.initialize());
   app.use(passport.session());
 
-  // Enable CORS for your React frontend
-  app.enableCors({
-    origin: 'http://localhost:5173', // Replace with your frontend domain
-    credentials: true,
-  });
 
   await app.listen(8000);
 }

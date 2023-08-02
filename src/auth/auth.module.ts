@@ -10,10 +10,7 @@ import { AuthController } from './controllers/auth.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
-    PassportModule.register({
-      session:true,
-    })
+    TypeOrmModule.forFeature([User])
   ],
   controllers: [AuthController],
   providers: [{
