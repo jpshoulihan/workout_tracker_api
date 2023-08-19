@@ -40,8 +40,8 @@ export class UsersController {
     //update to check unique on email
     @UsePipes(ValidationPipe)
     @Post('register')
-    createUser(@Body() createUserDto: CreateUserDto){
-        return this.userService.createUser(createUserDto);
+    async createUser(@Body() createUserDto: CreateUserDto){
+        return await this.userService.createUser(createUserDto);
     }
     @Post()
     login(): any{

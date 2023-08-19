@@ -13,20 +13,29 @@ export class UsersService {
     findUsers() {
         return this.UserRepository.find();
     }
-    createUser(createUserDto: CreateUserDto) {
-        const password = encodePassword(createUserDto.password)
-        const newUser = this.UserRepository.create({ ...createUserDto, password })
-        return this.UserRepository.save(newUser);
-    }
-    findUserByEmail(email: string): Promise<User | undefined> {
+    async findUserByEmail(email: string): Promise<User | undefined> {
         return this.UserRepository.findOne({ where: { email } })
+    }
+    async createUser(createUserDto: CreateUserDto) {
+        const userExists = await this.findUserByEmail(createUserDto.email)
+        console.log('Indisde createUser, check if user exists ==>', userExists)
+        if (userExists !== null) {
+            return {
+                status: 'error',
+                error: 409,
+            }
+        } else {
+            const password = encodePassword(createUserDto.password)
+            const newUser = this.UserRepository.create({ ...createUserDto, password })
+            return this.UserRepository.save(newUser);
+        }
     }
     findUserById(id: string): Promise<User | undefined> {
         return this.UserRepository.findOne({ where: { id } })
     }
     async updateProfile(id: string, updateUserProfileDto: UpdateUserProfileDto) {
         const user = await this.UserRepository.findOne({ where: { id } })
-        const updateUserProfile = {...user, ...updateUserProfileDto}
+        const updateUserProfile = { ...user, ...updateUserProfileDto }
         return this.UserRepository.save(updateUserProfile)
     }
 }
