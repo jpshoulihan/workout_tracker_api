@@ -16,25 +16,37 @@ export class UsersService {
     async findUserByEmail(email: string): Promise<User | undefined> {
         return this.UserRepository.findOne({ where: { email } })
     }
+    async findeUserByUserName(username: string): Promise<User | undefined> {
+        return this.UserRepository.findOne({ where: { username } })
+    }
     async createUser(createUserDto: CreateUserDto) {
         const userExists = await this.findUserByEmail(createUserDto.email)
-        console.log('Indisde createUser, check if user exists ==>', userExists)
-        if (userExists !== null) {
+
+        if (userExists !== null)
             return {
                 status: 'error',
                 error: 409,
             }
-        } else {
-            const password = encodePassword(createUserDto.password)
-            const newUser = this.UserRepository.create({ ...createUserDto, password })
-            return this.UserRepository.save(newUser);
-        }
+
+        const password = encodePassword(createUserDto.password)
+        const newUser = this.UserRepository.create({ ...createUserDto, password })
+        return this.UserRepository.save(newUser);
     }
     findUserById(id: string): Promise<User | undefined> {
         return this.UserRepository.findOne({ where: { id } })
     }
     async updateProfile(id: string, updateUserProfileDto: UpdateUserProfileDto) {
         const user = await this.UserRepository.findOne({ where: { id } })
+
+        if (updateUserProfileDto.username !== null) {
+            const checkUserName = await this.findeUserByUserName(updateUserProfileDto.username)
+            if (checkUserName !== null) {
+                return {
+                    status: 'error',
+                    error: 409,
+                }
+            }
+        }
         const updateUserProfile = { ...user, ...updateUserProfileDto }
         return this.UserRepository.save(updateUserProfile)
     }
