@@ -16,6 +16,7 @@ import { CustomExercisesModule } from './custom-exercises/custom-exercises.modul
 import * as dotenv from 'dotenv';
 import { CustomExercise } from './typeorm/entities/CustomExercise';
 import { PassportModule } from '@nestjs/passport';
+import { BaseExercise } from './typeorm/entities/BaseExercise';
 dotenv.config();
 
 @Module({
@@ -25,7 +26,7 @@ dotenv.config();
     url: process.env.DB_URL,
     synchronize: true,
     logging: true,
-    entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise, CustomExercise],
+    entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise, CustomExercise, BaseExercise],
   }),
   PassportModule.register({session: true}),
   UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule, CustomExercisesModule],
@@ -33,3 +34,12 @@ dotenv.config();
   providers: [AppService],
 })
 export class AppModule {}
+
+// {
+//   type: "postgres",
+//   host: localhost ,
+//   port: 5432,
+//   username: postgres,
+//   password: 'workout_tracker',
+//   database: 'workout_tracker,
+//  }

@@ -1,7 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Workout } from "./Workout";
-import { WorkoutExercise } from "./WorkoutExercise";
-import { CustomExercise } from "./CustomExercise";
 
 @Entity({name: 'users'})
 export class User {
@@ -40,7 +38,4 @@ export class User {
 
     @OneToMany(() => Workout, workout => workout.user)
     workouts: Workout[];
-
-    @OneToMany(() => CustomExercise, customExercise => customExercise.user)
-    customExercises: CustomExercise[];
 }
