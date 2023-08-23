@@ -15,7 +15,20 @@ export class WorkoutExercisesService {
                 workout: { id: createWorkoutExerciseDto.workoutId },
                 exercise: { id: createWorkoutExerciseDto.exerciseId }
             })
-            
+
         return this.WorkoutExerciseRepository.save(newWorkoutExercise)
+    }
+
+    async createWorkoutExercises(requestBody: CreateWorkoutExerciseDto[]) {
+        const newWorkoutExercises = requestBody.map(dto => {
+            const newWorkoutExercise = this.WorkoutExerciseRepository.create({
+                ...dto,
+                workout: { id: dto.workoutId },
+                exercise: { id: dto.exerciseId }
+            })
+            return newWorkoutExercise
+        })
+        await this.WorkoutExerciseRepository.save(newWorkoutExercises);
+        return newWorkoutExercises
     }
 }

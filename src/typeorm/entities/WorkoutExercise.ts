@@ -1,7 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Exercise } from "./Exercise";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Workout } from "./Workout";
-import { CustomExercise } from "./CustomExercise";
+import { BaseExercise } from "./BaseExercise";
 
 @Entity({name: 'workout_exercises'})
 export class WorkoutExercise {
@@ -11,11 +10,9 @@ export class WorkoutExercise {
     @ManyToOne(() => Workout, workout => workout.workoutExercises)
     workout: Workout
 
-    @ManyToOne(() => Exercise, exercise => exercise.workoutExercises)
-    exercise: Exercise
-    
-    @ManyToOne(() => CustomExercise, customExercise => customExercise.workoutExercises)
-    customExercise: CustomExercise
+    @ManyToOne(() => BaseExercise, baseExercise => baseExercise.workoutExercises)
+    @JoinColumn({name: 'excerciseId'})
+    exercise: BaseExercise
 
     @Column()
     order: number; 

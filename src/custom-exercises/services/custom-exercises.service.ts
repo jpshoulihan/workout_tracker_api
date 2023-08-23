@@ -9,7 +9,7 @@ export class CustomExercisesService {
     constructor(@InjectRepository(CustomExercise) private CustomExerciseRepository: Repository<CustomExercise>) { }
 
     createCustomExercise(createCustomExerciseDto: CreateCustomExerciseDto) {
-        const newCustomExercise = this.CustomExerciseRepository.create({ ...createCustomExerciseDto, user: { id: createCustomExerciseDto.userId } })
+        const newCustomExercise = this.CustomExerciseRepository.create({ ...createCustomExerciseDto, userId: { id: createCustomExerciseDto.userId } })
         return this.CustomExerciseRepository.save(newCustomExercise)
     }
     findCustomExercises() {
@@ -19,11 +19,11 @@ export class CustomExercisesService {
         const customExercise = await this.CustomExerciseRepository.findOne({ where: { id } })
         return customExercise
     }
-    async updateCustomExercise(id: string, createCustomExerciseDto: CreateCustomExerciseDto) {
-        const customExercise = await this.CustomExerciseRepository.findOne({ where: { id } })
-        const updateCustomExercise = { ...customExercise, ...createCustomExerciseDto }
-        return this.CustomExerciseRepository.save(updateCustomExercise)
-    }
+    // async updateCustomExercise(id: string, createCustomExerciseDto: CreateCustomExerciseDto) {
+    //     const customExercise = await this.CustomExerciseRepository.findOne({ where: { userId } })
+    //     const updateCustomExercise = { ...customExercise, ...createCustomExerciseDto }
+    //     return this.CustomExerciseRepository.save(updateCustomExercise)
+    // }
     async deleteCustomExercise(id: string) {
         const deleteCustomExercise = await this.CustomExerciseRepository.createQueryBuilder('custom_exercises')
             .delete()

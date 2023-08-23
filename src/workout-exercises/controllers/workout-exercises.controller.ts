@@ -12,4 +12,10 @@ export class WorkoutExercisesController {
     async createWorkoutExercise(@Body() createWorkoutExerciseDto: CreateWorkoutExerciseDto){
         return this.workoutExerciseService.createWorkoutExercise({...createWorkoutExerciseDto})
     }
+
+    @UseGuards(AuthenticatedGuard)
+    @Post('workout-exercises')
+    async createWorkoutExercises(@Body() createWorkoutExerciseDto: CreateWorkoutExerciseDto[]){
+        return this.workoutExerciseService.createWorkoutExercises(createWorkoutExerciseDto)
+    }
 }
