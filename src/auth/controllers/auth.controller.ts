@@ -1,7 +1,7 @@
-import { Controller, Post, UseGuards, Get, Session, Req } from '@nestjs/common';
+import { Controller, Post, UseGuards, Get, Session, Req, Res} from '@nestjs/common';
 import { AuthenticatedGuard, LocalAuthGuard } from 'src/auth/utils/LocalGuard';
 import { SerializedUser } from 'src/typeorm/entities';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { plainToClass } from 'class-transformer';
 
 @Controller('auth')
@@ -19,10 +19,21 @@ export class AuthController {
         session.authenticated = true;
     }
 
-    @UseGuards(AuthenticatedGuard)
+    // @UseGuards(AuthenticatedGuard)
+    // @Get('status')
+    // async getAuthStatus(@Req() req: Request){
+    //     return req.isAuthenticated();
+    // }
+
     @Get('status')
-    async getAuthStatus(@Req() req: Request){
-        return req.isAuthenticated();
+    async getAuthStatus(@Req() req: Request, @Res() res: Response): Promise<void> {
+        if (req.isAuthenticated()) {
+            // User is authenticated, return true
+            res.status(200).json(true);
+        } else {
+            // User is not authenticated, return false
+            res.status(200).json(false);
+        }
     }
 
     @Get('logout')
