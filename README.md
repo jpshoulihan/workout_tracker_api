@@ -15,7 +15,9 @@ To offer an accessible application that enables a user to easily Plan workouts a
 
 ### **Current ERD**
 
-![alt text](workout_planner_v2.png "samp console output")<br/><br><br/><br/>
+- using single table inheritence, base_exercises contains stock exercises provided by the developers and custom exercises created by the user. Users can create workout routines with a mixture of both custom and stock exercises. 
+
+![alt text](erd_v2.png "erd")<br/><br><br/><br/>
 
 ### Endpoint Examples
 

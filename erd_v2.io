@@ -1,6 +1,3 @@
-// Use DBML to define your database structure
-// Docs: https://dbml.dbdiagram.io/docs
-
 Table users {
   id uuid [primary key]
   username varchar
@@ -16,8 +13,9 @@ Table users {
   created_at timestamp
 }
 
-Table base_excercise {
+Table base_exercises {
   id uuid [primary key]
+  user_id uuid
   body_split enum
   action enum
   equipment varchar
@@ -28,8 +26,8 @@ Table base_excercise {
 
 Table workouts {
   id uuid [primary key]
-  work_name varchar
   user_id uuid
+  work_name varchar
   created_at timestamp
 }
 
@@ -40,8 +38,34 @@ Table workout_exercises {
   order integer
 }
 
-Ref: base_exercise.user_id > users.id // many-to-one
+Table calendar_entries {
+  id uuid [primary key]
+  workout_id uuid
+  user_id uuid
+  date datetime
+}
 
-Ref: workout_exercises.exercise_id < exercises.id
+Table exercise_statistics {
+    id uuid [primary key]
+    calendar_id uuid
+    exercise_id uuid
+    sets integer
+    reps integer
+    wieght real
+}
 
-Ref: Ref: workout_exercises.workout_id < workouts.id
+Ref: workout_exercises.exercise_id < base_exercises.id
+
+Ref: workout_exercises.workout_id < workouts.id
+
+Ref: base_exercises.user_id > users.id
+
+Ref: workouts.user_id > users.id
+
+Ref: calendar_entries.workout_id > workout_exercises.id
+
+Ref: calendar_entries.user_id > users.id
+
+Ref: exercise_statistics.calendar_id > calendar_entries.id
+
+Ref: exercise_statistics.exercise_id > base_exercises.id
