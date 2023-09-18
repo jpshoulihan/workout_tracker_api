@@ -27,7 +27,7 @@ Table base_exercises {
 Table workouts {
   id uuid [primary key]
   user_id uuid
-  work_name varchar
+  workout_name varchar
   created_at timestamp
 }
 

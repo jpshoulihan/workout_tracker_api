@@ -17,6 +17,7 @@ import * as dotenv from 'dotenv';
 import { CustomExercise } from './typeorm/entities/CustomExercise';
 import { PassportModule } from '@nestjs/passport';
 import { BaseExercise } from './typeorm/entities/BaseExercise';
+import { BaseExercisesModule } from './base_exercises/base_exercises.module';
 dotenv.config();
 
 @Module({
@@ -29,7 +30,7 @@ dotenv.config();
     entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise, CustomExercise, BaseExercise],
   }),
   PassportModule.register({session: true}),
-  UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule, CustomExercisesModule],
+  UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule, CustomExercisesModule, BaseExercisesModule],
   controllers: [AppController],
   providers: [AppService],
 })
