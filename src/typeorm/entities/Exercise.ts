@@ -1,6 +1,6 @@
 import { ChildEntity } from "typeorm";
 import { BaseExercise } from "./BaseExercise";
 
-@ChildEntity()
+@ChildEntity('stock_exercise')
 export class Exercise extends BaseExercise {
 }

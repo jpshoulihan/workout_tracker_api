@@ -4,7 +4,7 @@ import { WorkoutExercise } from "./WorkoutExercise";
 export type BodySplitType = 'upper' | 'lower'
 export type ActionType = 'push' | 'pull'
 
-@Entity()
+@Entity('base_exercises')
 @TableInheritance({column: {type: "varchar", name: "category"}})
 export class BaseExercise {
     @PrimaryGeneratedColumn('uuid')
