@@ -31,4 +31,14 @@ export class WorkoutExercisesService {
         await this.WorkoutExerciseRepository.save(newWorkoutExercises);
         return newWorkoutExercises
     }
+
+    async deleteWorkoutExercise(id: string) {
+        const deleteBaseExercise = await this.WorkoutExerciseRepository.createQueryBuilder('workout_exercises')
+            .delete()
+            .from(WorkoutExercise)
+            .where("baseExerciseId = :baseExerciseId", { baseExerciseId: id })
+            .execute()
+
+        return deleteBaseExercise
+    }
 }

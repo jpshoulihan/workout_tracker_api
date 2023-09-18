@@ -11,7 +11,7 @@ export class WorkoutExercise {
     workout: Workout
 
     @ManyToOne(() => BaseExercise, baseExercise => baseExercise.workoutExercises)
-    @JoinColumn({name: 'excerciseId'})
+    @JoinColumn({name: 'baseExerciseId'})
     exercise: BaseExercise
 
     @Column()

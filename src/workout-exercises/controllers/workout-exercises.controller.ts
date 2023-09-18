@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
 import { CreateWorkoutExerciseDto } from 'src/workout-exercises/dtos/CreateWorkoutExerciseDto';
 import { WorkoutExercisesService } from 'src/workout-exercises/services/workout-exercises.service';
@@ -17,5 +17,11 @@ export class WorkoutExercisesController {
     @Post('workout-exercises')
     async createWorkoutExercises(@Body() createWorkoutExerciseDto: CreateWorkoutExerciseDto[]){
         return this.workoutExerciseService.createWorkoutExercises(createWorkoutExerciseDto)
+    }
+
+    @UseGuards(AuthenticatedGuard)
+    @Delete('workout-exercise/:id')
+    async deleteWorkoutExercise(@Param("id") id: string){
+        return this.workoutExerciseService.deleteWorkoutExercise(id)
     }
 }
