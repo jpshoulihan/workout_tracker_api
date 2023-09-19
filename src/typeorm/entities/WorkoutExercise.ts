@@ -10,7 +10,7 @@ export class WorkoutExercise {
     @ManyToOne(() => Workout, workout => workout.workoutExercises)
     workout: Workout
 
-    @ManyToOne(() => BaseExercise, baseExercise => baseExercise.workoutExercises)
+    @ManyToOne(() => BaseExercise, baseExercise => baseExercise.workoutExercises, {onDelete:'CASCADE'})
     @JoinColumn({name: 'baseExerciseId'})
     exercise: BaseExercise
 

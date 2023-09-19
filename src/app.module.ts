@@ -22,9 +22,12 @@ dotenv.config();
 
 @Module({
   imports: [TypeOrmModule.forRoot({
-    name: 'default',
     type:'postgres',
-    url: process.env.DB_URL,
+    host: process.env.DB_HOST,
+    port: 5432,
+    username: process.env.DB_USERNAME,
+    password:process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
     entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise, CustomExercise, BaseExercise],
@@ -35,12 +38,3 @@ dotenv.config();
   providers: [AppService],
 })
 export class AppModule {}
-
-// {
-//   type: "postgres",
-//   host: localhost ,
-//   port: 5432,
-//   username: postgres,
-//   password: 'workout_tracker',
-//   database: 'workout_tracker,
-//  }
