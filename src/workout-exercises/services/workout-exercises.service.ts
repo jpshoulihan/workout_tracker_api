@@ -20,11 +20,11 @@ export class WorkoutExercisesService {
     }
 
     async createWorkoutExercises(requestBody: CreateWorkoutExerciseDto[]) {
-        const newWorkoutExercises = requestBody.map(dto => {
+        const newWorkoutExercises = requestBody.map(workoutExercise => {
             const newWorkoutExercise = this.WorkoutExerciseRepository.create({
-                ...dto,
-                workout: { id: dto.workoutId },
-                exercise: { id: dto.exerciseId }
+                ...workoutExercise,
+                workout: { id: workoutExercise.workoutId },
+                exercise: { id: workoutExercise.exerciseId }
             })
             return newWorkoutExercise
         })
@@ -40,5 +40,14 @@ export class WorkoutExercisesService {
             .execute()
 
         return deleteBaseExercise
+    }
+
+    async deleteAllWorkoutExercises(id:string){
+        const deleteWorkout = await this.WorkoutExerciseRepository.createQueryBuilder('workout_exercises')
+            .delete()
+            .from(WorkoutExercise)
+            .where("workoutId = :workoutId", { workoutId: id })
+            .execute()
+        return deleteWorkout
     }
 }

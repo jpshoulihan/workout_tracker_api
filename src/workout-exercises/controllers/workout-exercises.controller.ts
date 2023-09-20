@@ -24,4 +24,10 @@ export class WorkoutExercisesController {
     async deleteWorkoutExercise(@Param("id") id: string){
         return this.workoutExerciseService.deleteWorkoutExercise(id)
     }
+
+    @UseGuards(AuthenticatedGuard)
+    @Delete('workout-exercises/:id')
+    async deleteAllWorkoutExercises(@Param("id") id: string){
+        return this.workoutExerciseService.deleteAllWorkoutExercises(id)
+    }
 }
