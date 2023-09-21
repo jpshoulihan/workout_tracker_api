@@ -25,12 +25,12 @@ export class CustomExercisesController {
         createCustomExerciseDto.userId = user.id
         return this.customExerciseService.createCustomExercise(createCustomExerciseDto);
     }
-    // @UseGuards(AuthenticatedGuard)
-    // @Patch('custom-exercise/:id')
-    // async updateCustomExercise(@Param("id") id:string, @Body() createCustomExerciseDto: CreateCustomExerciseDto){
-    //     const customExercise = await this.customExerciseService.findCustomExerciseById(id)
-    //     return this.customExerciseService.updateCustomExercise(customExercise.id, createCustomExerciseDto)
-    // }
+    @UseGuards(AuthenticatedGuard)
+    @Patch('custom-exercise/:id')
+    async updateCustomExercise(@Param("id") id:string, @Body() createCustomExerciseDto: CreateCustomExerciseDto){
+        const customExercise = await this.customExerciseService.findCustomExerciseById(id)
+        return this.customExerciseService.updateCustomExercise(customExercise.id, createCustomExerciseDto)
+    }
     @UseGuards(AuthenticatedGuard)
     @Delete('custom-exercise/:id')
     deleteCustomExercise(@Param("id") id:string){

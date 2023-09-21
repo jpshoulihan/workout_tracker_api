@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCustomExerciseDto } from 'src/custom-exercises/dtos/CustomExerciseDto';
+import { UpdateCustomExerciseDto } from 'src/custom-exercises/dtos/UpdateCustomExerciseDto';
 import { CustomExercise } from 'src/typeorm/entities/CustomExercise';
 import { Repository } from 'typeorm';
 
@@ -19,11 +20,11 @@ export class CustomExercisesService {
         const customExercise = await this.CustomExerciseRepository.findOne({ where: { id } })
         return customExercise
     }
-    // async updateCustomExercise(id: string, createCustomExerciseDto: CreateCustomExerciseDto) {
-    //     const customExercise = await this.CustomExerciseRepository.findOne({ where: { userId } })
-    //     const updateCustomExercise = { ...customExercise, ...createCustomExerciseDto }
-    //     return this.CustomExerciseRepository.save(updateCustomExercise)
-    // }
+    async updateCustomExercise(id: string, updateCustomExerciseDto: UpdateCustomExerciseDto) {
+        const customExercise = await this.CustomExerciseRepository.findOne({ where: { id } })
+        const updatedCustomExercise = { ...customExercise, ...updateCustomExerciseDto }
+        return this.CustomExerciseRepository.save(updatedCustomExercise)
+    }
     async deleteCustomExercise(id: string) {
         const deleteCustomExercise = await this.CustomExerciseRepository.createQueryBuilder('custom_exercises')
             .delete()
