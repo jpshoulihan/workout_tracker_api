@@ -7,7 +7,7 @@ export class WorkoutExercise {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ManyToOne(() => Workout, workout => workout.workoutExercises)
+    @ManyToOne(() => Workout, workout => workout.workoutExercises, {onDelete:'CASCADE'})
     workout: Workout
 
     @ManyToOne(() => BaseExercise, baseExercise => baseExercise.workoutExercises, {onDelete:'CASCADE'})
