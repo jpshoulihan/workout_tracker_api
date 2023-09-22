@@ -13,7 +13,7 @@ Table users {
   created_at timestamp
 }
 
-Table base_exercises {
+Table exercises {
   id uuid [primary key]
   user_id uuid
   body_split enum
@@ -53,11 +53,11 @@ Table exercise_statistics {
     wieght real
 }
 
-Ref: workout_exercises.exercise_id < base_exercises.id
+Ref: workout_exercises.exercise_id < exercises.id
 
 Ref: workout_exercises.workout_id < workouts.id
 
-Ref: base_exercises.user_id > users.id
+Ref: exercises.user_id > users.id
 
 Ref: workouts.user_id > users.id
 
@@ -67,4 +67,4 @@ Ref: calendar_entries.user_id > users.id
 
 Ref: exercise_statistics.calendar_id > calendar_entries.id
 
-Ref: exercise_statistics.exercise_id > base_exercises.id
+Ref: exercise_statistics.exercise_id > exercises.id

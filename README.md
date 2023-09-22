@@ -15,7 +15,7 @@ To offer an accessible application that enables a user to easily **Plan** workou
 
 ### **Current ERD**
 
-- using single table inheritence, base_exercises contains stock exercises provided by the developers and custom exercises created by the user. Users can create workout routines with a mixture of both custom and stock exercises. 
+- using single table inheritence, exercises contains stock-exercises provided by the developers and custom-exercises created by the user. Users can create workout routines with a mixture of both custom and stock exercises. 
 
 ![alt text](erd_v2.png "erd")<br/><br><br/><br/>
 
