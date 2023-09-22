@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEnum, IsString } from "class-validator";
 
 enum ActionType {
@@ -13,18 +14,23 @@ enum BodySplitType {
 export class UpdateCustomExerciseDto {
 
     @IsEnum(BodySplitType)
+    @ApiProperty()
     bodySplit: BodySplitType;
 
     @IsEnum(ActionType)
+    @ApiProperty()
     action: ActionType;
 
     @IsString()
+    @ApiProperty()
     equipment: string;
 
     @IsString()
+    @ApiProperty()
     exerciseName: string;
 
     @IsString()
+    @ApiProperty()
     instruction: string;
 
 }

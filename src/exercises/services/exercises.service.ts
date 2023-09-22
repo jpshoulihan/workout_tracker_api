@@ -1,20 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Exercise } from 'src/typeorm/entities/Exercise';
-import { CreateExerciseDto } from 'src/exercises/dtos/CreateExercise.dto';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ExercisesService {
-    constructor(@InjectRepository(Exercise) private ExerciseRepository: Repository<Exercise>){}
+    constructor(@InjectRepository(Exercise) private BaseExerciseRepository: Repository<Exercise>){}
 
-    createExercise(createExerciseDto: CreateExerciseDto) {
-        const newExercise = this.ExerciseRepository.create({...createExerciseDto})
-        return this.ExerciseRepository.save(newExercise)
+    findBaseExercises() {
+        return this.BaseExerciseRepository.find()
     }
 
-    findExercises() {
-        return this.ExerciseRepository.find()
-    }
+    async deleteBaseExercise(id: string) {
+        const deleteBaseExercise = await this.BaseExerciseRepository.createQueryBuilder('exercises')
+            .delete()
+            .from(Exercise)
+            .where("id = :id", { id: id })
+            .andWhere("category = :category", { category: 'custom_exercise' })
+            .execute()
 
+        return deleteBaseExercise
+    }
 }

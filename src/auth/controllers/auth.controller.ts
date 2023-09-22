@@ -1,19 +1,36 @@
-import { Controller, Post, UseGuards, Get, Session, Req, Res} from '@nestjs/common';
+import { Controller, Post, UseGuards, Get, Session, Req, Res, Body} from '@nestjs/common';
 import { AuthenticatedGuard, LocalAuthGuard } from 'src/auth/utils/LocalGuard';
 import { SerializedUser } from 'src/typeorm/entities';
 import { Request, Response } from 'express';
 import { plainToClass } from 'class-transformer';
+import { ApiExcludeEndpoint, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
 @Controller('auth')
+@ApiTags('Authentication')
 export class AuthController {
     //invoking guard to enforce protection
-    @UseGuards(LocalAuthGuard)
-    @Post('login')
-    async login(@Req() req: Request){
-        return plainToClass(SerializedUser, req.user)
-    }
+    // @UseGuards(LocalAuthGuard)
+    // @Post('login')
+    // @ApiOperation({ summary: 'User login' })
+    // @ApiResponse({status: 201, description: 'User session begins'})
+    // @ApiParam({ name: 'username', description: 'Username for login' })
+    // @ApiParam({ name: 'password', description: 'Password for login' })
+    // async login(@Req() req: Request){
+    //     return plainToClass(SerializedUser, req.user)
+    // }
+
+     //invoking guard to enforce protection
+     @UseGuards(LocalAuthGuard)
+     @Post('login')
+     @ApiOperation({ summary: 'User login' })
+     @ApiResponse({status: 201, description: 'User session begins', type: CreateUserDto})
+     async login(@Body() loginDto: CreateUserDto){
+         return plainToClass(SerializedUser, loginDto)
+     }
 
     @Get('')
+    @ApiExcludeEndpoint()
     async getAuthSession(@Session() session: Record<string, any>){
         //modifying the session intializes the session
         session.authenticated = true;
@@ -26,6 +43,8 @@ export class AuthController {
     // }
 
     @Get('status')
+    @ApiOperation({ summary: 'Authentication check' })
+    @ApiResponse({status: 201, description: 'Returns true if Authenticated, else false'})
     async getAuthStatus(@Req() req: Request, @Res() res: Response): Promise<void> {
         if (req.isAuthenticated()) {
             // User is authenticated, return true
@@ -37,6 +56,8 @@ export class AuthController {
     }
 
     @Get('logout')
+    @ApiOperation({ summary: 'User logout' })
+    @ApiResponse({status: 201, description: 'Session destroyed'})
     async logout(@Req() request: Request) {
         request.session.destroy((err) => {
             if (err) {

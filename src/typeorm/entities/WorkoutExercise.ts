@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Workout } from "./Workout";
-import { BaseExercise } from "./BaseExercise";
+import { Exercise } from "./Exercise";
 
 @Entity({name: 'workout_exercises'})
 export class WorkoutExercise {
@@ -10,10 +10,7 @@ export class WorkoutExercise {
     @ManyToOne(() => Workout, workout => workout.workoutExercises, {onDelete:'CASCADE'})
     workout: Workout
 
-    @ManyToOne(() => BaseExercise, baseExercise => baseExercise.workoutExercises, {onDelete:'CASCADE'})
+    @ManyToOne(() => Exercise, exercise => exercise.workoutExercises, {onDelete:'CASCADE'})
     @JoinColumn({name: 'baseExerciseId'})
-    exercise: BaseExercise
-
-    @Column()
-    order: number; 
+    exercise: Exercise
 }

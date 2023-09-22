@@ -16,7 +16,7 @@ enum BodySplitType {
     LOWER = 'lower',
 }
 
-export class CreateExerciseDto {
+export class CreateStockExerciseDto {
 
     @IsEnum(BodySplitType)
     bodySplit: BodySplitType;

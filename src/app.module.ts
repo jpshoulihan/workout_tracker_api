@@ -7,7 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { SessionEntity } from './typeorm/entities/Session';
 import { ExercisesModule } from './exercises/exercises.module';
-import { Exercise } from './typeorm/entities/Exercise';
+import { StockExercise } from './typeorm/entities/StockExercise';
 import { Workout } from './typeorm/entities/Workout';
 import { WorkoutsModule } from './workouts/workouts.module';
 import { WorkoutExercise } from './typeorm/entities/WorkoutExercise';
@@ -16,8 +16,8 @@ import { CustomExercisesModule } from './custom-exercises/custom-exercises.modul
 import * as dotenv from 'dotenv';
 import { CustomExercise } from './typeorm/entities/CustomExercise';
 import { PassportModule } from '@nestjs/passport';
-import { BaseExercise } from './typeorm/entities/BaseExercise';
-import { BaseExercisesModule } from './base_exercises/base_exercises.module';
+import { Exercise } from './typeorm/entities/Exercise';
+import { StockExercisesModule } from './stock-exercises/stock-exercises.module';
 dotenv.config();
 
 @Module({
@@ -30,10 +30,10 @@ dotenv.config();
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [User, SessionEntity, Exercise, Workout, WorkoutExercise, CustomExercise, BaseExercise],
+    entities: [User, SessionEntity, StockExercise, Workout, WorkoutExercise, CustomExercise, Exercise],
   }),
   PassportModule.register({session: true}),
-  UsersModule, AuthModule, ExercisesModule, WorkoutsModule, WorkoutExercisesModule, CustomExercisesModule, BaseExercisesModule],
+  UsersModule, AuthModule, ExercisesModule, StockExercisesModule, CustomExercisesModule, WorkoutsModule, WorkoutExercisesModule],
   controllers: [AppController],
   providers: [AppService],
 })

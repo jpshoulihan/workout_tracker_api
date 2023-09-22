@@ -11,7 +11,7 @@ enum BodySplitType {
     LOWER = 'lower',
 }
 
-export class CreateCustomExerciseDto {
+export class ExerciseDto {
 
     @IsString()
     @ApiProperty()
@@ -36,5 +36,4 @@ export class CreateCustomExerciseDto {
     @IsString()
     @ApiProperty()
     instruction: string;
-
 }

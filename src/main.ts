@@ -6,6 +6,7 @@ import { TypeormStore } from 'connect-typeorm';
 import { SessionEntity } from './typeorm/entities/Session';
 import { DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   dotenv.config();
@@ -17,7 +18,7 @@ async function bootstrap() {
     origin: 'http://localhost:5173', // Replace with your frontend domain
     credentials: true,
   });
-  
+
   app.use(
     session({
       name: 'WORKOUT_TRACKER_SESSION_ID',
@@ -35,6 +36,14 @@ async function bootstrap() {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('Workout Tracker API')
+    .setDescription('The client must be registered and logged in to access endpoints')
+    .setVersion('1.0')
+    .build()
+
+  const document = SwaggerModule.createDocument(app, swaggerConfig)
+  SwaggerModule.setup('api', app, document)
 
   await app.listen(8000);
 }

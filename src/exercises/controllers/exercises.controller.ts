@@ -1,20 +1,26 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
+import { Controller, Inject, Delete, UseGuards, Param, Get } from '@nestjs/common';
+import { ExercisesService } from '../services/exercises.service';
 import { AuthenticatedGuard } from 'src/auth/utils/LocalGuard';
-import { CreateExerciseDto } from 'src/exercises/dtos/CreateExercise.dto';
-import { ExercisesService } from 'src/exercises/services/exercises.service';
+import { ApiExcludeEndpoint, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ExerciseDto } from '../dtos/ExerciseDto';
 
 @Controller('exercises')
+@ApiTags('All Exercises (custom and stock)')
 export class ExercisesController {
-    constructor(@Inject('EXERCISE_SERVICE') private readonly exerciseService: ExercisesService) {}
-
-    @Post('exercise')
-    createExercise(@Body() createExerciseDto: CreateExerciseDto){
-        return this.exerciseService.createExercise(createExerciseDto);
-    }
+    constructor(@Inject('BASE_EXERCISES_SERVICE') private readonly exercisesService: ExercisesService ){}
 
     @UseGuards(AuthenticatedGuard)
     @Get()
-    getExercises(){
-        return this.exerciseService.findExercises()
+    @ApiOperation({ summary: "Returns all exercises. Includes all stock exercises and user's custom exercises" })
+    @ApiResponse({status: 201, description: 'All exercises returned', type: ExerciseDto, isArray: true})
+    getCustomExercises(){
+        return this.exercisesService.findBaseExercises();
+    }
+
+    @UseGuards(AuthenticatedGuard)
+    @Delete('custom-exercise/:id')
+    @ApiExcludeEndpoint()
+    deleteCustomExercise(@Param("id") id:string){
+        return this.exercisesService.deleteBaseExercise(id)
     }
 }
