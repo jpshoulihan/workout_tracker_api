@@ -13,11 +13,11 @@ export class CustomExercisesController {
     getCustomExercises(){
         return this.customExerciseService.findCustomExercises();
     }
-    // @UseGuards(AuthenticatedGuard)
-    // @Get('id/:id')
-    // async getCustomExerciseById(@Param('id') id:string){
-    //     return await this.customExerciseService.findCustomExerciseById(id)
-    // }
+    @UseGuards(AuthenticatedGuard)
+    @Get('id/:id')
+    async getCustomExerciseById(@Param('id') id:string){
+        return await this.customExerciseService.findCustomExerciseById(id)
+    }
     @UseGuards(AuthenticatedGuard)
     @Post('custom-exercise')
     createCustomExercise(@Body() createCustomExerciseDto: CreateCustomExerciseDto, @Req() req:Request){

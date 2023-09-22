@@ -7,6 +7,10 @@ import { Repository } from 'typeorm';
 export class BaseExercisesService {
     constructor(@InjectRepository(BaseExercise) private BaseExerciseRepository: Repository<BaseExercise>){}
 
+    findBaseExercises() {
+        return this.BaseExerciseRepository.find()
+    }
+
     async deleteBaseExercise(id: string) {
         const deleteBaseExercise = await this.BaseExerciseRepository.createQueryBuilder('base_exercises')
             .delete()
