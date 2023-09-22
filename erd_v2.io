@@ -35,7 +35,6 @@ Table workout_exercises {
   id uuid [primary key]
   workout_id uuid
   exercise_id uuid
-  order integer
 }
 
 Table calendar_entries {
