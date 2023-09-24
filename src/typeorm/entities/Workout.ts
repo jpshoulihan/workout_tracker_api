@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 import { WorkoutExercise } from "./WorkoutExercise";
+import { CalendarEntry } from "./CalendarEntry";
 
 @Entity({ name: 'workouts' })
 export class Workout {
@@ -18,4 +19,7 @@ export class Workout {
 
     @OneToMany(() => WorkoutExercise, workoutExercise => workoutExercise.workout, {cascade: true})
     workoutExercises: WorkoutExercise[];
+    
+    @OneToMany(() => CalendarEntry, calendarEntry => calendarEntry.workout)
+    calendarEntries: CalendarEntry[];
 }

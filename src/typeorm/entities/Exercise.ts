@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
 import { WorkoutExercise } from "./WorkoutExercise";
+import { ExerciseStatistic } from "./ExerciseStatistic";
 
 export type BodySplitType = 'upper' | 'lower'
 export type ActionType = 'push' | 'pull'
@@ -27,6 +28,9 @@ export class Exercise {
 
     @OneToMany(() => WorkoutExercise, workoutExercise => workoutExercise.exercise, { cascade: true })
     workoutExercises: WorkoutExercise[];
+
+    @OneToMany(() => ExerciseStatistic, exerciseStatistic => exerciseStatistic.exercise)
+    exerciseStatistics: ExerciseStatistic[];
 }
 
 

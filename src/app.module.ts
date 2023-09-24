@@ -18,6 +18,10 @@ import { CustomExercise } from './typeorm/entities/CustomExercise';
 import { PassportModule } from '@nestjs/passport';
 import { Exercise } from './typeorm/entities/Exercise';
 import { StockExercisesModule } from './stock-exercises/stock-exercises.module';
+import { CalendarEntriesModule } from './calendar-entries/calendar-entries.module';
+import { CalendarEntry } from './typeorm/entities/CalendarEntry';
+import { ExerciseStatisticsModule } from './exercise-statistics/exercise-statistics.module';
+import { ExerciseStatistic } from './typeorm/entities/ExerciseStatistic';
 dotenv.config();
 
 @Module({
@@ -30,10 +34,10 @@ dotenv.config();
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [User, SessionEntity, StockExercise, Workout, WorkoutExercise, CustomExercise, Exercise],
+    entities: [User, SessionEntity, StockExercise, Workout, WorkoutExercise, CustomExercise, Exercise, CalendarEntry, ExerciseStatistic],
   }),
   PassportModule.register({session: true}),
-  UsersModule, AuthModule, ExercisesModule, StockExercisesModule, CustomExercisesModule, WorkoutsModule, WorkoutExercisesModule],
+  UsersModule, AuthModule, ExercisesModule, StockExercisesModule, CustomExercisesModule, ExerciseStatisticsModule, WorkoutsModule, WorkoutExercisesModule, CalendarEntriesModule],
   controllers: [AppController],
   providers: [AppService],
 })
