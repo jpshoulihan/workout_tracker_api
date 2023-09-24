@@ -15,19 +15,32 @@ To offer an accessible application that enables a user to easily **Plan** workou
 
 ### **Current ERD**
 
-- using single table inheritence, exercises contains stock-exercises provided by the developers and custom-exercises created by the user. Users can create workout routines with a mixture of both custom and stock exercises. 
+_Using single table inheritence, exercises contains stock-exercises provided by the developers and custom-exercises created by the user. Users can create workout routines with a mixture of both custom and stock exercises._
+<br/><br/>
 
 ![alt text](erd_v2.png "erd")<br/><br><br/><br/>
 
 ### Set Up
 
-- clone repository
-- install dependencies
-- add DB credentials as outlined in .env.example
-- npm run start
 
-- navigate to `http://localhost:8000/api/` for Swagger GUI
+```
+git clone git@github.com:jpshoulihan/workout_tracker_api.git
+```
 
+```
+npm i
+```
+
+```
+add DB credentials as outlined in .env.example
+```
+
+```
+npm run start
+```
+```
+navigate to `http://localhost:8000/api/` for Swagger UI
+```
 
 ## Created by
 

@@ -1,7 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Exercise } from "./Exercise";
 import { CalendarEntry } from "./CalendarEntry";
-import { interval } from "rxjs";
 
 @Entity('exrercise_statistics')
 export class ExerciseStatistic {
