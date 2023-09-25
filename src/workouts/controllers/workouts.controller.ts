@@ -47,7 +47,7 @@ export class WorkoutsController {
     @UseGuards(AuthenticatedGuard)
     @Delete('workout/:id')
     @ApiOperation({ summary: 'Delete workout and all associated exercises by workout id' })
-    @ApiResponse({status: 201, description: 'workout delted'})
+    @ApiResponse({status: 201, description: 'workout deleted'})
     async deleteWorkoutById(@Param('id') id: string){
         const deleteWorkout = await this.workoutService.deleteWorkoutById(id)
         return deleteWorkout

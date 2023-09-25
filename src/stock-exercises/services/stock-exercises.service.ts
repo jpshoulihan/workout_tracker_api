@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Exercise } from 'src/typeorm/entities/Exercise';
 import { CreateStockExerciseDto } from 'src/stock-exercises/dtos/CreateStockExercise.dto';
+import { StockExercise } from 'src/typeorm/entities/StockExercise';
 
 @Injectable()
 export class StockExercisesService {
-    constructor(@InjectRepository(Exercise) private ExerciseRepository: Repository<Exercise>){}
+    constructor(@InjectRepository(StockExercise) private ExerciseRepository: Repository<StockExercise>){}
 
     createExercise(createStockExerciseDto: CreateStockExerciseDto) {
         const newExercise = this.ExerciseRepository.create({...createStockExerciseDto})

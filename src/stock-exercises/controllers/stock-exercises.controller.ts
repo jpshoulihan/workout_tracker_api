@@ -7,12 +7,12 @@ import { StockExercisesService } from 'src/stock-exercises/services/stock-exerci
 @Controller('stock-exercises')
 @ApiTags('Stock Exercises')
 export class StockExercisesController {
-    constructor(@Inject('STOCK_EXERCISES_SERVICE') private readonly exerciseService: StockExercisesService) {}
+    constructor(@Inject('STOCK_EXERCISES_SERVICE') private readonly stockExerciseService: StockExercisesService) {}
 
     @Post('stock-exercise')
     @ApiExcludeEndpoint()
     createExercise(@Body() createStockExerciseDto: CreateStockExerciseDto){
-        return this.exerciseService.createExercise(createStockExerciseDto);
+        return this.stockExerciseService.createExercise(createStockExerciseDto);
     }
 
     @UseGuards(AuthenticatedGuard)
@@ -20,6 +20,6 @@ export class StockExercisesController {
     @ApiOperation({ summary: 'Returns all stock exercises' })
     @ApiResponse({status: 201, description: '', isArray:true})
     getExercises(){
-        return this.exerciseService.findExercises()
+        return this.stockExerciseService.findExercises()
     }
 }
