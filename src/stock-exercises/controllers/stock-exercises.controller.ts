@@ -10,7 +10,7 @@ export class StockExercisesController {
     constructor(@Inject('STOCK_EXERCISES_SERVICE') private readonly stockExerciseService: StockExercisesService) {}
 
     @Post('stock-exercise')
-    @ApiExcludeEndpoint()
+    // @ApiExcludeEndpoint()
     createExercise(@Body() createStockExerciseDto: CreateStockExerciseDto){
         return this.stockExerciseService.createExercise(createStockExerciseDto);
     }
